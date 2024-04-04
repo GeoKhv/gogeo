@@ -1,14 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Configuration, OpenAIApi } = require('openai');
+const { OpenAI } = require('openai');
 
 const app = express();
 const port = 3000;
 
-// Ваш ключ API OpenAI
-const openai = new OpenAIApi(new Configuration({
-  apiKey: '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',
-}));
+// Инициализация клиента OpenAI с использованием ключа API из переменных окружения
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 app.use(bodyParser.json());
 
