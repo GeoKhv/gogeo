@@ -1,3 +1,5 @@
+console.log("API ключ:", process.env.OPENAI_API_KEY); // Добавьте эту строку в начало вашего файла server.js
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const { OpenAI } = require('openai');
