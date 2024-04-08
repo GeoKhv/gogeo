@@ -5,7 +5,7 @@ const { Configuration, OpenAI } = require('openai');
 const app = express();
 const port = 3000;
 
-// Использование bodyParser для обработки JSON-тел запросов
+// Используем bodyParser для разбора JSON-тел запросов
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
