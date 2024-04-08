@@ -1,17 +1,21 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const { Configuration, OpenAI } = require('openai');
+
 const app = express();
 const port = 3000;
+
+// Использование bodyParser для обработки JSON-тел запросов
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('Hello from gogeo!');
 });
 
 // Инициализация клиента OpenAI с использованием ключа API из переменных окружения
-const openai = new OpenAI({
+const openai = new OpenAI(new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
-});
-
-app.use(bodyParser.json());
+}));
 
 app.post('/ask', async (req, res) => {
   const prompt = req.body.prompt;
