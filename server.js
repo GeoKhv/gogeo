@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 app.post('/ask', async (req, res) => {
-  const prompt = req.body.prompt;
+  console.log("Запрос получен:", req.body);
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
@@ -27,8 +27,8 @@ app.post('/ask', async (req, res) => {
       temperature: 0.5,
     });
     res.json({ response: completion.data.choices[0].text.trim() });
-  } catch (error) {
-    console.error(error);
+ } catch (error) {
+    console.error("Ошибка при выполнении запроса к OpenAI:", error);
     res.status(500).send('An error occurred');
   }
 });
