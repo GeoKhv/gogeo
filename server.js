@@ -1,9 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const { OpenAI } = require('openai');
-
 const app = express();
 const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Hello from gogeo!');
+});
 
 // Инициализация клиента OpenAI с использованием ключа API из переменных окружения
 const openai = new OpenAI({
