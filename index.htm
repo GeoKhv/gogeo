@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Персональный Ассистент</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Персональный ассистент</title>
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-box">
-            <!-- Сообщения будут добавляться сюда -->
-        </div>
-        <input type="text" id="chat-input" placeholder="Задайте вопрос...">
-        <button id="send-btn">Отправить</button>
-    </div>
+    <h2>Задайте вопрос моему персональному ассистенту</h2>
+    <input type="text" id="question" placeholder="Введите ваш вопрос здесь...">
+    <button onclick="askQuestion()">Отправить вопрос</button>
+    <p id="answer">Здесь появится ответ...</p>
+
     <script src="script.js"></script>
 </body>
 </html>
