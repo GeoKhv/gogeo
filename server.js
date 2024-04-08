@@ -22,15 +22,14 @@ app.post('/ask', async (req, res) => {
   const prompt = req.body.prompt;
   console.log("Запрос получен:", req.body);
   try {
-    // Используем модель GPT-4
-    const completion = await openai.createCompletion({
-      model: "GPT-4", // Замените на "gpt-4" как только она станет доступна в SDK
+    // Обновлено для использования GPT-4
+    const response = await openai.createCompletion({
+      model: "gpt-4", // Убедитесь, что модель доступна в вашем тарифе
       prompt: prompt,
       max_tokens: 150,
-      n: 1,
-      temperature: 0.5,
+      temperature: 0.7,
     });
-    res.json({ response: completion.data.choices[0].text.trim() });
+    res.json({ response: response.data.choices[0].text.trim() });
   } catch (error) {
     console.error("Ошибка при выполнении запроса к OpenAI:", error);
     res.status(500).send('An error occurred');
