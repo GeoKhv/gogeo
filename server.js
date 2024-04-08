@@ -1,8 +1,8 @@
-console.log("API ключ:", process.env.OPENAI_API_KEY); // Добавьте эту строку в начало вашего файла server.js
+console.log("API ключ:", process.env.OPENAI_API_KEY);
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const { OpenAI } = require('openai');
+const { Configuration, OpenAIApi } = require('openai');
 
 const app = express();
 const port = 3000;
@@ -13,21 +13,25 @@ app.get('/', (req, res) => {
   res.send('Hello from gogeo!');
 });
 
-const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 app.post('/ask', async (req, res) => {
+  const prompt = req.body.prompt;
   console.log("Запрос получен:", req.body);
   try {
+    // Используем модель GPT-4
     const completion = await openai.createCompletion({
-      model: "text-davinci-003",
+      model: "GPT-4", // Замените на "gpt-4" как только она станет доступна в SDK
       prompt: prompt,
-      maxTokens: 150,
+      max_tokens: 150,
       n: 1,
-      stop: null,
       temperature: 0.5,
     });
     res.json({ response: completion.data.choices[0].text.trim() });
- } catch (error) {
+  } catch (error) {
     console.error("Ошибка при выполнении запроса к OpenAI:", error);
     res.status(500).send('An error occurred');
   }
